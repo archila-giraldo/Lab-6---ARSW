@@ -9,7 +9,7 @@ var apimock=(function(){
     mockdata["maryweyland"]=[{author:"maryweyland","points":[{"x":140,"y":140},{"x":115,"y":115}],"name":"house2"},
         {author:"maryweyland","points":[{"x":140,"y":140},{"x":115,"y":115}],"name":"gear2"},{author:"maryweyland","points":[{"x":120,"y":130},{"x":125,"y":125}],"name":"plano2"}];
     mockdata["autor3"]=[{author:"autor3","points":[{"x":130,"y":130},{"x":105,"y":105}],"name":"house3"},
-        {author:"autor3","points":[{"x":130,"y":130},{"x":105,"y":105}],"name":"gear3"},{author:"autor3","points":[{"x":110,"y":120},{"x":115,"y":115}],"name":"plano3"}];
+        {author:"autor3","points":[{"x":130,"y":130},{"x":105,"y":105},{"x":98,"y":60},{"x":50,"y":40},{"x":130,"y":130}],"name":"gear3"},{author:"autor3","points":[{"x":110,"y":120},{"x":115,"y":115}],"name":"plano3"}];
 
 
     return {

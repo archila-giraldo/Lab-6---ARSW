@@ -22,7 +22,7 @@ var app = (function (){
          alert("Porfavor ingrese un nombre");
          getNameOnView();
       }else {
-         apimock.getBlueprintsByAuthor(author, (req, resp) => {
+         apiclient.getBlueprintsByAuthor(author, (req, resp) => {
             changeData(resp);
          });
       }
@@ -41,7 +41,8 @@ var app = (function (){
          getNameOnView();
       }else {
          getNameOnView();
-         const datanew = data.map((element) => {
+         const dataJson = JSON.parse(data);
+         const datanew = dataJson.map((element) => {
             return {
                name: element.name,
                puntos: element.points.length
@@ -53,6 +54,7 @@ var app = (function (){
          });
 
          const totalpoints = datanew.reduce((suma, {puntos}) => suma + puntos, 0);
+         document.getElementById("total_puntos").innerHTML = "Total user points: "+totalpoints;
          }
       }
 
@@ -63,7 +65,7 @@ var app = (function (){
    function getBlueprintByAuthorAndName(data) {
          author = $("#author").val();
          blueprintName = data.id;
-         apimock.getBlueprintsByNameAndAuthor(author,blueprintName, (req, resp) => {
+         apiclient.getBlueprintsByNameAndAuthor(author,blueprintName, (req, resp) => {
             console.log(resp);
             paint(resp);
          });
@@ -74,17 +76,18 @@ var app = (function (){
     * @param data datos del blueprint a pintar
     */
    function paint(data) {
+      const newData = JSON.parse(data);
          getBluePrintNameOnView();
        let canvas = document.getElementById("mi_canvas");
        canvas.width = canvas.width;
        let ctx = canvas.getContext("2d");
-       let x = data.points[0].x;
-       let y = data.points[0].y;
+       let x = newData.points[0].x;
+       let y = newData.points[0].y;
        ctx.moveTo(x,y);
          if (data.points.length>1){
-            for(let i = 1;i < data.points.length;i++){
-               x = data.points[i].x;
-               y = data.points[i].y;
+            for(let i = 1;i < newData.points.length;i++){
+               x = newData.points[i].x;
+               y = newData.points[i].y;
                ctx.lineTo(x,y);
             }
          }

@@ -33,11 +33,21 @@ public class BlueprintsServices {
 
     @Autowired
     Filter filtro;
-    
+
+    /**
+     * Agrega un nuevo blueprint
+     * @param bp blueprint a agregar
+     * @throws BlueprintPersistenceException
+     */
     public void addNewBlueprint(Blueprint bp) throws BlueprintPersistenceException {
         bpp.saveBlueprint(bp);
     }
-    
+
+    /**
+     * Retorna todas las blueprints
+     * @param accepted codigo http de aceptación
+     * @return lista de todas las blueprints
+     */
     public List<Blueprint> getAllBlueprints(HttpStatus accepted) {
         try{
             System.out.println(bpp.getBlueprints().toString());

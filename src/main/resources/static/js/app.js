@@ -1,15 +1,21 @@
 var app = (function (){
    let author;
-   let BluesprintName;
-
+   let blueprintName;
+   /**
+    * Retorna el nombre del autor seleccionado
+    */
    function getName() {
-      $("#author-name").text(author + "'s " + "blueprints:");
+      $("#author-name").val(author + "'s " + "blueprints:");
    }
-
+   /**
+    * Retorna el nombre del blueprint seleccionado
+    */
    function getBluePrintName() {
-      $("#current-name").text("Current blueprint: " + blueprintName);
+      $("#current-name").val("Current blueprint: " + blueprintName);
    }
-
+   /**
+    * Guarda el nombre del autor introducido en el html
+    */
    function getNameAuthorBlueprints(){
       author = $("#author").val();
       if(author === ""){
@@ -21,6 +27,11 @@ var app = (function (){
       }
    }
 
+   /**
+    *Vacía la tabla blueprint-table, si los datos son indefinidos retorna que no existe el autor
+    * de otro modo llenamos la tabla html con los datos correspondientes
+    * @param data lista de blueprints de un autor
+    */
    function changeData(data) {
       $("#blueprint-table tbody").empty();
       if(data === undefined){
@@ -35,15 +46,18 @@ var app = (function (){
          });
 
          datanew.map((elements) =>{
-            $("#blueprint-table > tbody:last").append($("<tr><td>" + elements.name + "</td><td>" + elements.puntos.toString() + "</td><td>" + "<button  id=" + elements.name + " onclick=app.getBlueprintByAuthorAndName(this)>Pintar</button>" + "</td>"));
+            $("#blueprint-table > tbody:last").append($("<tr><td>" + elements.name + "</td><td>" + elements.puntos.toString() + "</td><td>" + "<button  id=" + elements.name + "onclick = "+"app.getBlueprintByAuthorAndName(this)>"+Pintar+"</button>" + "</td>"));
          });
 
          const totalpoints = datanew.reduce((suma, {puntos}) => suma + puntos, 0);
          }
       }
 
-      function getBlueprintByAuthorAndName(data) {
-         console.log(data);
+   /**
+    * Pinta un blueprint seleccionado de un autor
+    * @param data blueprint que deseamos pintar
+    */
+   function getBlueprintByAuthorAndName(data) {
          author = $("#author").val();
          blueprintName = data.id;
          apimock.getBlueprintsByNameAndAuthor(blueprintName, author, (req, resp) => {
@@ -52,7 +66,11 @@ var app = (function (){
          });
       }
 
-      function paint(data) {
+   /**
+    * Pinta un blueprint
+    * @param data datos del blueprint a pintar
+    */
+   function paint(data) {
          getBluePrintName();
 
       }

@@ -4,14 +4,14 @@ var app = (function (){
    /**
     * Retorna el nombre del autor seleccionado
     */
-   function getName() {
-      $("#author-name").val(author + "'s " + "blueprints:");
+   function getNameOnView() {
+      document.getElementById("author_name").innerHTML = author+"'s blueprints";
    }
    /**
     * Retorna el nombre del blueprint seleccionado
     */
-   function getBluePrintName() {
-      $("#current-name").val("Current blueprint: " + blueprintName);
+   function getBluePrintNameOnView() {
+      document.getElementById("blueprint_name").innerHTML = "Current blueprint: " + blueprintName;
    }
    /**
     * Guarda el nombre del autor introducido en el html
@@ -20,6 +20,7 @@ var app = (function (){
       author = $("#author").val();
       if(author === ""){
          alert("Porfavor ingrese un nombre");
+         getNameOnView();
       }else {
          apimock.getBlueprintsByAuthor(author, (req, resp) => {
             changeData(resp);
@@ -36,8 +37,10 @@ var app = (function (){
       $("#blueprint-table tbody").empty();
       if(data === undefined){
          alert("No existe el autor");
+         author = "";
+         getNameOnView();
       }else {
-         getName();
+         getNameOnView();
          const datanew = data.map((element) => {
             return {
                name: element.name,
@@ -46,7 +49,7 @@ var app = (function (){
          });
 
          datanew.map((elements) =>{
-            $("#blueprint-table > tbody:last").append($("<tr><td>" + elements.name + "</td><td>" + elements.puntos.toString() + "</td><td>" + "<button  id=" + elements.name + "onclick = "+"app.getBlueprintByAuthorAndName(this)>"+Pintar+"</button>" + "</td>"));
+            $("#blueprint-table > tbody:last").append($("<tr><td>" + elements.name + "</td><td>" + elements.puntos.toString() + "</td><td>" + "<button  id=" + elements.name + " onclick=app.getBlueprintByAuthorAndName(this)>Pintar</button>" + "</td>"));
          });
 
          const totalpoints = datanew.reduce((suma, {puntos}) => suma + puntos, 0);
@@ -60,7 +63,7 @@ var app = (function (){
    function getBlueprintByAuthorAndName(data) {
          author = $("#author").val();
          blueprintName = data.id;
-         apimock.getBlueprintsByNameAndAuthor(blueprintName, author, (req, resp) => {
+         apimock.getBlueprintsByNameAndAuthor(author,blueprintName, (req, resp) => {
             console.log(resp);
             paint(resp);
          });
@@ -71,8 +74,24 @@ var app = (function (){
     * @param data datos del blueprint a pintar
     */
    function paint(data) {
-         getBluePrintName();
-
+         getBluePrintNameOnView();
+       let canvas = document.getElementById("mi_canvas");
+       canvas.width = canvas.width;
+       let ctx = canvas.getContext("2d");
+       let x = data.points[0].x;
+       let y = data.points[0].y;
+       ctx.moveTo(x,y);
+         if (data.points.length>1){
+            for(let i = 1;i < data.points.length;i++){
+               x = data.points[i].x;
+               y = data.points[i].y;
+               ctx.lineTo(x,y);
+            }
+         }
+         else {
+            alert("El blueprint solo tiene un punto")
+         }
+         ctx.stroke();
       }
 
       return{

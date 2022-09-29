@@ -1,6 +1,7 @@
 var app = (function (){
    let author;
    let blueprintName;
+   
    /**
     * Retorna el nombre del autor seleccionado
     */
@@ -41,8 +42,7 @@ var app = (function (){
          getNameOnView();
       }else {
          getNameOnView();
-         const dataJson = JSON.parse(data);
-         const datanew = dataJson.map((element) => {
+         const datanew = data.map((element) => {
             return {
                name: element.name,
                puntos: element.points.length
@@ -66,7 +66,6 @@ var app = (function (){
          author = $("#author").val();
          blueprintName = data.id;
          apiclient.getBlueprintsByNameAndAuthor(author,blueprintName, (req, resp) => {
-            console.log(resp);
             paint(resp);
          });
       }
@@ -76,26 +75,26 @@ var app = (function (){
     * @param data datos del blueprint a pintar
     */
    function paint(data) {
-      const newData = JSON.parse(data);
-         getBluePrintNameOnView();
-       let canvas = document.getElementById("mi_canvas");
-       canvas.width = canvas.width;
-       let ctx = canvas.getContext("2d");
-       let x = newData.points[0].x;
-       let y = newData.points[0].y;
-       ctx.moveTo(x,y);
-         if (data.points.length>1){
-            for(let i = 1;i < newData.points.length;i++){
-               x = newData.points[i].x;
-               y = newData.points[i].y;
-               ctx.lineTo(x,y);
-            }
+      getBluePrintNameOnView();
+      let canvas = document.getElementById("mi_canvas");
+      canvas.width = canvas.width;
+      let ctx = canvas.getContext("2d");
+      let x = data.points[0].x;
+      let y = data.points[0].y;
+      ctx.moveTo(x,y);
+      if (data.points.length>1){
+         for(let i = 1;i < data.points.length;i++){
+            x = data.points[i].x;
+            y = data.points[i].y;
+            ctx.lineTo(x,y);
          }
-         else {
-            alert("El blueprint solo tiene un punto")
-         }
-         ctx.stroke();
       }
+      else {
+         alert("El blueprint solo tiene un punto")
+      }
+      ctx.stroke();
+      }
+      
 
       return{
          getNameAuthorBlueprints: getNameAuthorBlueprints,

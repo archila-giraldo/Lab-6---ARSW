@@ -11,8 +11,9 @@ var apiclient=(function(){
                         type: "GET",
                         url : '/version1/blueprints/'+authname,
                         success: function(data){
+                            const dataJson = JSON.parse(data);
                             callback(
-                                null, data
+                                null, dataJson
                             )
                         }
                     });
@@ -29,8 +30,9 @@ var apiclient=(function(){
                 type: "GET",
                 url : '/version1/blueprints/'+authname+"/"+bpname,
                 success: function(data){
+                    const dataJson = JSON.parse(data);
                     callback(
-                        null, data
+                        null, dataJson
                     )
                 }
             });

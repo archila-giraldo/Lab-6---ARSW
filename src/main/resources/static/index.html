@@ -9,17 +9,17 @@
         <script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
         <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
         <script src="js/apimock.js"></script>
-        <script src="js/app.js"></script>
         <script src="js/apiclient.js"></script>
+        <script src="js/app.js"></script>
     </head>
-    <body>
+    <body onLoad="app.init()">
         <div>
             <label>Author</label>
             <input id="author" type="text">
             <button onclick="app.getNameAuthorBlueprints()">Get Blueprints by author</button>
-            <label id ="author_name">Author name</label>
         </div>
         <div class = "table_div">
+            <label id ="author_name">Author name</label>
             <table id="blueprint-table">
                 <thead>
                 <tr>
@@ -31,11 +31,16 @@
                 <tbody>
                 </tbody>
             </table>
+            <label id="total_puntos"></label>
         </div>
-        <label id="total_puntos"></label>
         <div class = "canvas_div">
-            <label id="blueprint_name"></label>
-            <canvas id="mi_canvas" width="400" height="400"></canvas>
+            <canvas id="mi_canvas" width="400" height="400" style="border:1px solid black;"> </canvas>
+            <div>
+                <label id="blueprint_name"></label>
+                <button>Create new blueprint</button>
+                <button onclick="app.updateBlueprintsByNameAndAuthor()">Save/Update</button>
+                <button>Delete</button>
+            </div>
         </div>
     </body>
 </html>

@@ -53,7 +53,6 @@ public class InMemoryBlueprintPersistence implements BlueprintsPersistence{
     @Override
     public Blueprint getBlueprint(String author, String bprintname) throws BlueprintNotFoundException {
         Tuple<String,String> tp = new Tuple<>(author,bprintname);
-        System.out.println(blueprints.get(tp));
         return blueprints.get(tp);
     }
 
@@ -77,7 +76,6 @@ public class InMemoryBlueprintPersistence implements BlueprintsPersistence{
         for (Tuple tupla:keys){
             Blueprint bp = blueprints.get(tupla);
             bps.add(bp);
-            System.out.println(bps);
         }
         return bps;
     }

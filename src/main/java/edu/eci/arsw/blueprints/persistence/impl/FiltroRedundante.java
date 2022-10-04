@@ -6,7 +6,7 @@ import edu.eci.arsw.blueprints.persistence.Filter;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
-@Service
+
 /**
  * Clase que nos va a permitir eliminar la redundancia de los puntos en una blueprint
  */

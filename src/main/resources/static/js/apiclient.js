@@ -36,6 +36,29 @@ var apiclient=(function(){
                     )
                 }
             });
+        },
+        /**
+         * Actualiza el blueprint del autor y con el nombre que deseamos
+         * @param authname autor que queremos buscar
+         * @param bpname nombre del blueprint que queremos actualizar
+         * @param puntos Puntos que queremos añadir
+         * @returns {Promise<unknown>} promesa de la funcion
+         */
+        updateBlueprintsByNameAndAuthor:function (authname,bpname,puntos){
+            return new Promise((resolve, reject) => {
+            $.ajax({
+                type: "PUT",
+                url: '/version1/blueprints/'+authname+"/"+bpname,
+                data: puntos,
+                contentType: "application/json",
+                success: function (data) {
+                    resolve(data)
+                },
+                error: function (error) {
+                    reject(error)
+                }
+            })
+        })
         }
     }
 

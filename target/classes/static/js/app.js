@@ -103,7 +103,9 @@ var app = (function (){
       //En caso de que un blueprint tenga solo un punto no se pinta y no deja seleccionarlo ~ tener cuidado con esto al crear un blueprint desde 0
       else {
          alert("El blueprint solo tiene un punto");
-         hayBlueprintSeleccionado = false;
+         let x = blueprint.points[0].x;
+         let y = blueprint.points[0].y;
+         ctx.moveTo(x,y);
       }
       ctx.stroke();
    }
@@ -144,12 +146,18 @@ var app = (function (){
 
    function createBluePrint(){
       var bpName = prompt("Digite el nombre del BluePrint", "");
-      apiclient.ceateBP(author, bpName, getNameAuthorBlueprints);
+      apiclient.ceateBP(author, bpName).then((data) =>{
+         getNameAuthorBlueprints();
+      })
+      
    }
 
    function deleteBluePrint(){
-      apiclient.deleteBp(author, blueprintName, deleteCanvas);
-      getNameAuthorBlueprints();
+      apiclient.deleteBp(author, blueprintName).then(() =>{
+         getNameAuthorBlueprints();
+         deleteCanvas();
+      })
+      
    }
 
    function deleteCanvas(){

@@ -61,23 +61,37 @@ var apiclient=(function(){
         })
         },
 
-        ceateBP: function (author, bpName, callback) {
+        ceateBP: function (author, bpName) {
             var data = JSON.stringify({author: author, "points":[{}], "name": bpName})
-            $.ajax({
-                type: "POST",
-                url: '/version1/blueprints/add',
-                data: data,
-                contentType: "application/json"
+            return new Promise((resolve, reject) =>{
+                $.ajax({
+                    type: "POST",
+                    url: '/version1/blueprints/add',
+                    data: data,
+                    contentType: "application/json",
+                    success: function (data) {
+                        resolve(data)
+                    },
+                    error: function (error) {
+                        reject(error)
+                    }
+                }) 
             })
-            callback();
         },
-        deleteBp: function (author, blueprintName, callback){
-            $.ajax({
-                type: "DELETE",
-                url: '/version1/blueprints/' + author + "/" + blueprintName
+
+        deleteBp: function (author, blueprintName){
+            return new Promise((resolve, reject) =>{
+                $.ajax({
+                    type: "DELETE",
+                    url: '/version1/blueprints/' + author + "/" + blueprintName,
+                    success: function () {
+                        resolve()
+                    },
+                    error: function (error) {
+                        reject(error)
+                    }
+                })
             })
-            callback();
         }
     }
-
 })();

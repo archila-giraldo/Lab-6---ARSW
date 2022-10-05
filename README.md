@@ -2,6 +2,8 @@
 # Archila - Giraldo
 ## Rest Client Blueprint
 
+https://github.com/archila-giraldo/Lab-6-ARSW/blob/main/Diagrama%20sin%20t%C3%ADtulo.drawio
+
 ---
 
 ### Parte 1

@@ -2,7 +2,7 @@
 # Archila - Giraldo
 ## Rest Client Blueprint
 
-
+![](BlueprintComponents.drawio.png)
 ---
 
 ### Parte 1

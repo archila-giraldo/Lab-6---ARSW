@@ -128,5 +128,16 @@ public class BlueprintAPIController {
             return new ResponseEntity<>("No se pudo actualizar el plano", HttpStatus.FORBIDDEN);
         }
     }
+
+    @RequestMapping(value = "/{author}/{blueprintName}", method = RequestMethod.DELETE)
+    public ResponseEntity<?> deleteBluePrint(@RequestBody @PathVariable("author")String author,@PathVariable("blueprintName")String blueprintName){
+        try{
+            bps.deleteBluePrint(author, blueprintName);
+            return new ResponseEntity<>(HttpStatus.ACCEPTED);
+        }catch (Exception ex){
+            Logger.getLogger(BlueprintAPIController.class.getName()).log(Level.SEVERE, null, ex);
+            return new ResponseEntity<>("No se pudo eliminar", HttpStatus.NOT_FOUND);
+        }
+    }
 }
 

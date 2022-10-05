@@ -79,4 +79,9 @@ public class InMemoryBlueprintPersistence implements BlueprintsPersistence{
         }
         return bps;
     }
+
+    @Override
+    public void deleteBluePrint(String author, String blueprintName) {
+        blueprints.remove(new Tuple<>(author, blueprintName));
+    }
 }

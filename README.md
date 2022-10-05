@@ -19,6 +19,9 @@ y creamos los metodos de create, delete y update para los blue prints
 
 aqui en esta parte solo es necesario crear los metodos en el controller que nos permita realizar las acciones que necesitamos con el blueprint
 
+![image](https://user-images.githubusercontent.com/69320250/193968688-6213b29b-575f-44f2-bf4b-168ca194e3cf.png)
+
+
 ![image](https://user-images.githubusercontent.com/69320250/193965815-19fe6c71-1c38-4556-b012-c633e6272a79.png)
 
 ---
